@@ -4,7 +4,7 @@ from Course import get_course
 
 
 DOLLAR_RUB = 'https://www.google.com/search?q=%D0%B4%D0%BE%D0%BB%D0%BB%D0%B0%D1%80%D1%8B+%D0%B2+%D1%80%D1%83%D0%B' + \
-             '1%D0%BB%D0%B8&oq=%D0%B4%D0%9E%D0%9B%D0%9B%D0%90%D0%A0&gs_lcrp=EgZjaHJvbWUqDQgBEAAYgwEYsQMYgAQyDwg' + \t
+             '1%D0%BB%D0%B8&oq=%D0%B4%D0%9E%D0%9B%D0%9B%D0%90%D0%A0&gs_lcrp=EgZjaHJvbWUqDQgBEAAYgwEYsQMYgAQyDwg' + \
              'AEEUYORiDARixAxiABDINCAEQABiDARixAxiABDIKCAIQABixAxiABDINCAMQABiDARixAxiABDINCAQQABiDARixAxiABDIN' + \
              'CAUQABiDARixAxiABDIKCAYQABixAxiABDINCAcQABiDARixAxiABDINCAgQABiDARixAxiABDIHCAkQABiABNIBCTY4NDNqM' + \
              'GoxNagCALACAA&sourceid=chrome&ie=UTF-8'
