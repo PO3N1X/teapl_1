@@ -1,0 +1,57 @@
+from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from datetime import datetime
+
+# Создает базовый класс для определения моделей
+Base = declarative_base()
+
+# Определяет модель для таблицы с доходами
+class Income(Base):
+    __tablename__ = 'income'
+    id = Column(Integer, primary_key=True)
+    amount = Column(Float)
+    description = Column(String)
+    date = Column(DateTime, default=datetime.now)
+
+# Определяет модель для таблицы с расходами
+class Expense(Base):
+    __tablename__ = 'expense'
+    id = Column(Integer, primary_key=True)
+    amount = Column(Float)
+    description = Column(String)
+    category = Column(String)
+    date = Column(DateTime, default=datetime.now)
+
+# Создает соединение с базой данных
+engine = create_engine('sqlite:///income_expense.db', echo=True)
+
+# Создает таблицы в базе данных 
+Base.metadata.create_all(engine)
+
+# Создает сессию для взаимодействия с бд
+Session = sessionmaker(bind=engine)
+session = Session()
+
+# Функция для добавления дохода
+def add_income(amount, description):
+    income = Income(amount=amount, description=description)
+    session.add(income)
+    session.commit()
+
+# Функция для добавления расхода
+def add_expense(amount, description, category):
+    expense = Expense(amount=amount, description=description, category=category)
+    session.add(expense)
+    session.commit()
+
+# Функция для просмотра статистики расходов и доходов за выбранный период
+def get_statistics(start_date, end_date):
+    total_income = session.query(Income).filter(Income.date >= start_date, Income.date <= end_date).all()
+    total_expense = session.query(Expense).filter(Expense.date >= start_date, Expense.date <= end_date).all()
+
+    total_income_amount = sum(income.amount for income in total_income)
+    total_expense_amount = sum(expense.amount for expense in total_expense)
+
+    print(f"Total Income: {total_income_amount}")
+    print(f"Total Expense: {total_expense_amount}")
